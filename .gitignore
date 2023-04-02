@@ -1,0 +1,33 @@
+laravelrefah/vendor
+myrefahapp/node_modules
+
+myrefahapp/coverage
+
+# next.js
+myrefahapp/.next/
+myrefahapp/out/
+
+# production
+myrefahapp/build
+
+myrefahapp/package-lock.json
+
+# misc
+myrefahapp/.DS_Store
+myrefahapp/*.pem
+
+# debug
+myrefahapp/npm-debug.log*
+myrefahapp/yarn-debug.log*
+myrefahapp/yarn-error.log*
+myrefahapp/.pnpm-debug.log*
+
+# local env files
+myrefahapp/.env*.local
+
+# vercel
+myrefahapp/.vercel
+
+# typescript
+myrefahapp/*.tsbuildinfo
+myrefahapp/next-env.d.ts
