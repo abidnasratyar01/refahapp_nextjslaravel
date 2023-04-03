@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        \App\Models\Employee::create([
+        \App\Models\Employees::create([
             'name'=>'Ahmad Abid',
             'father_name' => 'Muhammad Hamed',
             'email'=> 'Ahmad@gmail.com',

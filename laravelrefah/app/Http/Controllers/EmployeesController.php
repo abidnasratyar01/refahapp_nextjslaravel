@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Employee;
+use App\Models\Employees;
 use Illuminate\Http\Request;
 
-class EmployeeController extends Controller
+class EmployeesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return response().json(Employee::latest()->get());
+        return response()->json(Employees::latest()->get());
     }
 
     /**
