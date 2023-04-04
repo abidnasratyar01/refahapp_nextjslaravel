@@ -1,0 +1,14 @@
+After Cloning or downloading zip of repo,
+1. create mysql database refahapp. 
+2. On command prompt at project directory, 
+   - cd laravelrefah
+   - composer install
+   - php artisan migrate:fresh --seed
+   - php artisan config:cache
+   - php artisan serve --port=8000
+   - cd ..
+   
+ 3. On command prompt at project directory,
+   - cd myrefahapp
+   - npm install 
+   - npm run dev
