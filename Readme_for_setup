@@ -1,15 +1,20 @@
 After Cloning or downloading zip of repo,
 1. create mysql database refahapp. 
 2. Go to dir laravelrefah, find file .env.example and rename it to .env, After that open .env file and make DB_DATABASE=refahapp instead of laravelrefah.
-3. On command prompt at project directory, 
+3. Add "intervention/image": "dev-master" to the “require” section of your composer.json file.
+4. open the config/app.php file. Add Intervention\Image\ImageServiceProvider::class, to the $providers array.
+5. Go to php folder in xampp and open the php.ini and php configurations settings file, and change the line ;extension=gd to just extension=gd.
+
+6. On command prompt at project directory, 
    - cd laravelrefah
+   - composer update
    - composer install
    - php artisan migrate:fresh --seed
    - php artisan config:cache
    - php artisan serve --port=8000
    - cd ..
    
- 4. On command prompt at project directory,
+7. On command prompt at project directory,
    - cd myrefahapp
    - npm install 
    - npm run dev
