@@ -14,6 +14,7 @@ export default function Employees() {
   const [email, setEmail] = useState('');
   const [isActive, setIsActive] = useState('0');
   const [employeeId, setEmployeeId] = useState('');
+  const [profile_dp, setProfileDp] = useState('');
 
   useEffect(() => {
     fetchEmployess();
@@ -44,13 +45,30 @@ export default function Employees() {
     })
   }
 
+  const readImage = async (input:any) => {
+    let imageFile = input.files[0];
+    var ext = input.files[0]['name'].substring(input.files[0]['name'].lastIndexOf('.') + 1).toLowerCase();
+   if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) {
+      const base64: string = await toBase64(imageFile) as string;
+      setProfileDp(base64);
+   }
+  }
+
+  const toBase64 = (file: File) => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+  })
+
   const submitForm = (e:any) => {
-    e.preventDefault();
+    e.preventDefault(); 
     let formData = new FormData();
     formData.append('name',name);
     formData.append('father_name', fatherName);
     formData.append('email', email);
     formData.append('is_active', isActive);
+    formData.append('profile_dp', profile_dp);
 
     let url = 'api/employees';
     if(employeeId != '') {
@@ -65,6 +83,7 @@ export default function Employees() {
       setIsActive('');
       setFatherName('');
       setEmployeeId('');
+      setProfileDp('');
       fetchEmployess();
     })
   }
@@ -102,7 +121,7 @@ export default function Employees() {
 
                                     <div className="col-md-12">
                                         <label className="form-label">Profile DP</label>
-                                        <input type="file" className="form-control" id="customFile" />
+                                        <input name='profile_dp' type="file" className="form-control" id="customFile" onChange={(e) => readImage(e.target)} />
                                     </div>
 
                                     <div className="form-check">
@@ -140,7 +159,7 @@ export default function Employees() {
               {employees && employees.map((item:any,i) => (
                 <tr key={i}>
                     <td>{i + 1}</td>   
-                    <td>{item.profile_dp}</td>
+                    <td>{item.dp && <Image src={item.dp} width={300} height={400} alt="Uploaded Image" />}</td>
                     <td>{item.name}</td>
                     <td>{item.father_name}</td>
                     <td>{item.email}</td>
