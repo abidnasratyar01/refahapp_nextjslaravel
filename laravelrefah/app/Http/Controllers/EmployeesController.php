@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Employees;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 
 class EmployeesController extends Controller
 {
@@ -13,7 +14,13 @@ class EmployeesController extends Controller
      */
     public function index()
     {
-        return response()->json(Employees::latest()->get());
+        $employees = Employees::latest()->get();
+        foreach( $employees as &$employee) {
+            if (file_exists($employee->profile_dp)) {
+                $employee->dp = "data:image/png;base64," . base64_encode(file_get_contents($employee->profile_dp));
+            }
+        }
+        return response()->json($employees);
     }
 
     /**
@@ -23,10 +30,9 @@ class EmployeesController extends Controller
     {
         $path='';
         if ($request->profile_dp != '') {
-            $png_url = "product-".time().".png";
-            $path = public_path().'img/' . $png_url;
+            $png_url = "profile-".time().".png";
+            $path = public_path(). '\\img\\' . $png_url;
             Image::make(file_get_contents($request->profile_dp))->save($path);   
-
         }
         
         Employees::create([

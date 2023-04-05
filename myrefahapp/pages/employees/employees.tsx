@@ -61,7 +61,8 @@ export default function Employees() {
     reader.onerror = error => reject(error);
   })
 
-  const submitForm = (e:any) => { 
+  const submitForm = (e:any) => {
+    e.preventDefault(); 
     let formData = new FormData();
     formData.append('name',name);
     formData.append('father_name', fatherName);
@@ -158,7 +159,7 @@ export default function Employees() {
               {employees && employees.map((item:any,i) => (
                 <tr key={i}>
                     <td>{i + 1}</td>   
-                    <td>{item.profile_dp}</td>
+                    <td>{item.dp && <Image src={item.dp} width={300} height={400} alt="Uploaded Image" />}</td>
                     <td>{item.name}</td>
                     <td>{item.father_name}</td>
                     <td>{item.email}</td>
