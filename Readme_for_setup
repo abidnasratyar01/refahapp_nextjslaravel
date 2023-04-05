@@ -1,6 +1,7 @@
 After Cloning or downloading zip of repo,
 1. create mysql database refahapp. 
-2. On command prompt at project directory, 
+2. Go to dir laravelrefah, find file .env.example and rename it to .env, After that open .env file and make DB_DATABASE=refahapp instead of laravelrefah.
+3. On command prompt at project directory, 
    - cd laravelrefah
    - composer install
    - php artisan migrate:fresh --seed
@@ -8,7 +9,7 @@ After Cloning or downloading zip of repo,
    - php artisan serve --port=8000
    - cd ..
    
- 3. On command prompt at project directory,
+ 4. On command prompt at project directory,
    - cd myrefahapp
    - npm install 
    - npm run dev
