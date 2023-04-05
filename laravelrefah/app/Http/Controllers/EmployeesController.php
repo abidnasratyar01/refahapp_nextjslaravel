@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Employees;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class EmployeesController extends Controller
 {
@@ -20,11 +21,19 @@ class EmployeesController extends Controller
      */
     public function store(Request $request)
     {
+        $path='';
+        if ($request->profile_dp != '') {
+            $png_url = "product-".time().".png";
+            $path = public_path().'img/' . $png_url;
+            Image::make(file_get_contents($request->profile_dp))->save($path);   
+
+        }
+        
         Employees::create([
             'name' => $request->name,
             'father_name' => $request->father_name,
             'email' => $request->email,
-            'profile_dp' => $request->is_active,
+            'profile_dp' => $path,
             'is_active' => $request->is_active
         ]);
 
